@@ -13,9 +13,8 @@ The knowledge base consists of regulatory product information for the two target
 | **USPI** | U.S. Prescribing Information | FDA |
 | **SmPC** | Summary of Product Characteristics | EMA |
 
-- **Drug classes:** SGLT2 inhibitors (e.g., [list ingredients]) and GLP-1 receptor agonists (e.g., [list ingredients]).
+- **Drug classes:** SGLT2 inhibitors (e.g.,Canagliflozin, Dapagliflozin, Empagliflozin) and GLP-1 receptor agonists (e.g., Semaglutide, Liraglutide, Tirzepatide).
 - **Sections of interest:** contraindications, warnings and precautions, adverse reactions, drug interactions, and use in special populations.
-- **Retrieved:** [month/year]. Labels are updated regularly, so re-ingest to refresh.
 
 > **Note:** This tool does not analyze individual FAERS case reports. It reflects what the approved labeling states, which makes it useful for comparing FDA and EMA safety language across products.
 
