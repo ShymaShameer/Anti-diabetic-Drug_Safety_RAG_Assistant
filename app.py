@@ -63,8 +63,8 @@ with st.sidebar:
             {
                 "role": "assistant",
                 "content": (
-                    "Hello! 👋 Welcome to the Drug Safety Analysis Assistant. "
-                    "You can ask me questions about FAERS data, adverse events "
+                    "Hello! 👋 Welcome to the Drug Safety Assistant."
+                    "You can ask me questions about FAERS data, adverse events" 
                     "associated with SGLT2 inhibitors and GLP-1 receptor agonists."
                 )
             }
@@ -75,13 +75,13 @@ st.title("💊  Drug Information Assistant")
 st.caption("FAERS Pharmacovigilance & Safety Query System")
 
 # --- Engine & Model Caching ---
-@st.cache_resource
+@st.cache_resource(show_spinner=False)
 def load_models():
     llm = initialise_llm()
     embed_model = get_embedding_model()
     return llm, embed_model
 
-@st.cache_resource
+@st.cache_resource(show_spinner=False)
 def get_cached_chat_engine(similarity_top_k: int, system_prompt: str):
     llm, embed_model = load_models()
     return get_chat_engine(
@@ -100,9 +100,8 @@ if "messages" not in st.session_state:
         {
             "role": "assistant",
             "content": (
-                "Hello! 👋 Welcome to the Drug Safety Analysis Assistant. "
-                "You can ask me questions about FAERS data, adverse events "
-                "associated with SGLT2 inhibitors and GLP-1 receptor agonists."
+                "Hello! 👋    Welcome to the Drug Safety Assistant.  \n"
+                "You can ask me questions about FAERS data, adverse events associated with SGLT2 inhibitors and GLP-1 receptor agonists."
             )
         }
     ]
@@ -132,7 +131,7 @@ for idx, msg in enumerate(st.session_state.messages):
                 st.button("👎", key=f"thumb_down_{idx}")
 
 # --- Handle User Input ---
-if prompt := st.chat_input("Ask about FAERS signals (e.g., 'What is Invokana?')..."):
+if prompt := st.chat_input("Ask about FAERS data (e.g., 'What is Invokana?')..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
