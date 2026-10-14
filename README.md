@@ -1,19 +1,34 @@
-# 💊 FAERS Pharmacovigilance RAG Assistant
+# 💊 Antidiabetic Drug Safety RAG Assistant
 
-An AI-powered pharmacovigilance intelligence tool built with **LlamaIndex**, **Groq LLM**, and **Streamlit**. This platform analyzes FDA Adverse Event Reporting System (FAERS) data and drug labeling for targeted therapeutic classes—specifically **SGLT2 inhibitors** and **GLP-1 receptor agonists**—to provide transparent, source-attributed safety insights.
+An AI-powered pharmacovigilance intelligence tool built with **LlamaIndex**, **Groq LLM**, and **Streamlit**. 
+It answers safety questions about **SGLT2 inhibitors** and **GLP-1 receptor agonists** using official regulatory drug labeling, and every answer is traceable to the exact source passage.
+
+---
+## 📚 Data Scope
+
+The knowledge base consists of regulatory product information for the two target drug classes:
+
+| Source | Document type | Regulator |
+|--------|---------------|-----------|
+| **USPI** | U.S. Prescribing Information | FDA |
+| **SmPC** | Summary of Product Characteristics | EMA |
+
+- **Drug classes:** SGLT2 inhibitors (e.g., [list ingredients]) and GLP-1 receptor agonists (e.g., [list ingredients]).
+- **Sections of interest:** contraindications, warnings and precautions, adverse reactions, drug interactions, and use in special populations.
+- **Retrieved:** [month/year]. Labels are updated regularly, so re-ingest to refresh.
+
+> **Note:** This tool does not analyze individual FAERS case reports. It reflects what the approved labeling states, which makes it useful for comparing FDA and EMA safety language across products.
 
 ---
 
 ## 🌟 Key Features
 
-- **HyDE & Re-Ranking Architecture**: Uses **Hypothetical Document Embeddings (HyDE)** for query expansion paired with a **SentenceTransformer Reranker** (`BAAI/bge-reranker-large`) to maximize contextual precision.
-- **Strict Source Attribution**: Renders source document chunks, page metadata, file names, and similarity scores in expandable UI containers for factual validation.
-- **Dynamic RAG Parameter Tuning**: Interactive sidebar controls allow real-time adjustments to retrieval depth (`similarity_top_k`) and system prompt personas.
-- **Streamlit Web Interface**: Features an optimized chat session state, instant message resetting ("New Chat"), non-blocking feedback placeholders (👍/👎), and resource caching via `@st.cache_resource`.
+- **HyDE & Re-Ranking Architecture:** Uses **Hypothetical Document Embeddings (HyDE)** to expand short or vague clinical queries, then re-ranks candidates with a **SentenceTransformer Reranker** (`BAAI/bge-reranker-large`) for higher contextual precision. 
+- **Strict Source Attribution:** Shows the retrieved chunks, file names, page numbers, and similarity scores in expandable containers so every claim can be checked against the label.
+- **Dynamic RAG Parameter Tuning:** Sidebar controls adjust retrieval depth (`similarity_top_k`) and the system prompt persona in real time.
+- **Streamlit Web Interface:** Persistent chat session state, one-click "New Chat" reset, and cached heavy resources via `@st.cache_resource`. The 👍/👎 buttons are UI placeholders and do not store feedback yet.
 
 ---
-
-## 🏗️ Project Architecture & Directory Structure
 
 ## 🏗️ Project Architecture & Directory Structure
 
