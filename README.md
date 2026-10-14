@@ -15,14 +15,19 @@ An AI-powered pharmacovigilance intelligence tool built with **LlamaIndex**, **G
 
 ## 🏗️ Project Architecture & Directory Structure
 
+## 🏗️ Project Architecture & Directory Structure
+
 ```text
 faers_rag/
+├── .vscode/                # VS Code workspace settings & launch configurations
 ├── app.py                  # Streamlit UI layer & caching orchestration
 ├── src/
 │   ├── engine.py           # Core RAG engine (HyDE, memory, retriever, reranker)
 │   ├── model_loader.py     # Initializers for Groq LLM & HuggingFace embeddings
-│   └── vector_store.py     # Vector database loading & persistence
-├── .gitignore              # Ignores large indexes, local storage, & .env files
+│   └── config.py           # Core application settings and RAG parameters
+├── local_storage/          # Persistent vector store index files (Git ignored)
+├── .env                    # API keys and local environment variables (Git ignored)
+├── .gitignore              # Excludes local_storage, notebooks, and environment files
 ├── environment.yml         # Conda environment definition
 ├── requirements.txt        # Python package dependencies
 └── README.md               # Project documentation
