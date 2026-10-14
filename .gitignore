@@ -1,0 +1,25 @@
+# Environment & Keys
+.env
+*.env
+
+# Python Cache & Virtual Environments
+__pycache__/
+*.py[cod]
+.venv/
+env/
+venv/
+
+# OS / IDE Files
+.DS_Store
+.vscode/
+.idea/
+
+# Storage & Indices
+storage/
+data/*.pdf
+*.parquet
+*.db
+
+# Large data / vector store / eval outputs
+local_storage/
+evaluation/
