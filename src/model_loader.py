@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import streamlit as st
 
 from llama_index.llms.groq import Groq
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
@@ -19,10 +20,18 @@ def _get_groq_api_key() -> str:
     """Helper to validate and retrieve the Groq API key."""
     api_key: str | None = os.getenv("GROQ_API_KEY")
     if not api_key:
+        try:
+            api_key = st.secrets["GROQ_API_KEY"]
+        except (KeyError, FileNotFoundError):
+            api_key = None
+
+    if not api_key:
         raise ValueError(
-            "GROQ_API_KEY not found. Make sure it's set in your .env file."
+            "GROQ_API_KEY not found. Set it in your local .env file, "
+            "or in Streamlit Cloud under Manage app → Settings → Secrets."
         )
     return api_key
+
 
 
 def initialise_llm() -> Groq:
