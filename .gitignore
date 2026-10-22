@@ -16,7 +16,7 @@ venv/
 
 # Storage & Indices
 storage/
-data/*.pdf
+#data/*.pdf
 *.parquet
 *.db
 
