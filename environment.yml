@@ -21,3 +21,4 @@ dependencies:
 # === Pip Packages ===
   - pip:
     - llama-index-llms-groq
+    - streamlit
