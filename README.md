@@ -3,7 +3,7 @@
 An AI-powered pharmacovigilance intelligence tool built with **LlamaIndex**, **Groq LLM**, and **Streamlit**. 
 It answers safety questions about **SGLT2 inhibitors** and **GLP-1 receptor agonists** using official regulatory drug labeling, and every answer is traceable to the exact source passage.
 
-🔗 Live Web Application: [antidiabetic drug safety-rag-assistant.streamlit.app](http://localhost:8501/) 
+🔗 Live Web Application: [antidiabetic drug safety-rag-assistant.streamlit.app]((https://bf9qmkknptxksxutqlvzzq.streamlit.app/)) 
 ---
 ## 📚 Data Scope
 
