@@ -33,7 +33,7 @@ def _get_groq_api_key() -> str:
     return api_key
 
 
-
+@st.cache_resource
 def initialise_llm() -> Groq:
     """Initialises the primary Groq LLM with core parameters from config."""
     return Groq(
@@ -41,7 +41,7 @@ def initialise_llm() -> Groq:
         model=LLM_MODEL,
     )
 
-
+#@st.cache_resource
 #def initialise_hyde_llm() -> Groq:
     #"""Initializes a lightweight, fast Groq LLM for HyDE query expansion."""
     #return Groq(
@@ -50,7 +50,7 @@ def initialise_llm() -> Groq:
      #   temperature=0.1,
     #)
 
-
+@st.cache_resource
 def get_embedding_model() -> HuggingFaceEmbedding:
     """Initialises and returns the HuggingFace embedding model."""
     # Ensure cache directory exists
