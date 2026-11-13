@@ -1,4 +1,8 @@
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # --- LLM Model Configuration ---
 LLM_MODEL: str = "openai/gpt-oss-120b"
@@ -10,11 +14,16 @@ LLM_PRESENCE_PENALTY: float = 0.2
 LLM_REPETITION_PENALTY: float = 1.03
 
 
-LLM_SYSTEM_PROMPT: str = (
-    "You are a helpful assistant.Answer questions only using the provided documents.If the answer isn't in the documents, say you don't know."
-)
+#LLM_SYSTEM_PROMPT: str = (
+    #"You are a helpful assistant.Answer questions only using the provided documents.If the answer isn't in the documents, say you don't know."
+#)
 
-
+LLM_SYSTEM_PROMPT: str = """
+You are an FDA Pharmacovigilance & Drug Safety Assistant. Answer strictly based on the retrieved USPI labeling context provided.
+- If a specific adverse event, boxed warning, or indication is NOT mentioned in the retrieved label text, explicitly state: "This event is not listed in the current retrieved USPI labeling text" (and check if it appears under 'Recent Major Changes' as removed).
+- Never rely on outside or pre-trained medical knowledge to assume a warning still exists if it is absent from the retrieved context.
+- Always cite the exact drug name and label section from the retrieved sources.
+"""
 
 # --- Embedding Model Configuration ---
 EMBEDDING_MODEL_NAME: str = "sentence-transformers/paraphrase-multilingual-mpnet-base-v2"
@@ -37,8 +46,25 @@ CHAT_MEMORY_TOKEN_LIMIT: int = 3900
 
 # --- Persistent Storage Paths (using pathlib for robust path handling) ---
 ROOT_PATH: Path = Path(__file__).parent.parent
-DATA_PATH: Path = ROOT_PATH / "data/"
-EMBEDDING_CACHE_PATH: Path = ROOT_PATH / "local_storage/embedding_model/"
-VECTOR_STORE_PATH: Path = ROOT_PATH / "local_storage/vector_store/"
+#DATA_PATH: Path = ROOT_PATH / "data/"
+#EMBEDDING_CACHE_PATH: Path = ROOT_PATH / "local_storage/embedding_model/"
+#VECTOR_STORE_PATH: Path = ROOT_PATH / "local_storage/vector_store/"
+
 
 BEST_RERANKER_STRATEGY: dict[str, int] = {'retriever_k': 10, 'reranker_n': 2}
+
+#----- for only USPI from 2014-2026-------
+
+
+USE_FULL_USPI = os.getenv("USE_FULL_USPI", "false").lower() == "true"
+
+if USE_FULL_USPI:
+    DATA_PATH: Path = ROOT_PATH / "data_uspi_full/"
+    VECTOR_STORE_PATH: Path = ROOT_PATH / "local_storage/vector_store_uspi_full/"
+    print(f"📂 Active Data Path: {DATA_PATH}")
+    print(f"🗄️ Active Vector Store: {VECTOR_STORE_PATH}")
+else:
+    DATA_PATH: Path = ROOT_PATH / "data/"
+    VECTOR_STORE_PATH: Path = ROOT_PATH / "local_storage/vector_store/"
+
+EMBEDDING_CACHE_PATH: Path = ROOT_PATH / "local_storage/embedding_model/"

@@ -17,6 +17,7 @@ venv/
 # Storage & Indices
 storage/
 #data/*.pdf
+data_uspi_full/
 *.parquet
 *.db
 
